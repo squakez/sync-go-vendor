@@ -15,23 +15,18 @@
 # limitations under the License.
 # ---------------------------------------------------------------------------
 
-name: sync-cherry-pick
-description: 'Action used to synchronize a downstream repository (which has a workflow calling this action) with an upstream repository.'
+name: sync-go-vendor
+description: 'Action used to refresh Go vendor directory.'      
 
 inputs:
-  upstream-org:
-    description: 'Upstream organization'
+  go-src-path:
+    description: 'Path where source code'
     required: true
-  upstream-repo:
-    description: 'Upstream repository'
-    required: true
-  upstream-branch:
-    description: 'Upstream branch'
-    required: true        
+    default: ./pkg/...
 
 runs:
   using: "composite"
 
   steps:
-    - name: Executing synchronization
-      run: sync-cherry-pick.sh ${{github.repository}}/${{github.ref_name}} --upstream ${{inputs.upstream-org}}/${{inputs.upstream-repo}}/${{inputs.upstream-branch}} 
+    - name: Refresh vendor directory
+      run: ${{ github.action_path }}/sync-go-vendor.sh 
