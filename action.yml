@@ -29,4 +29,5 @@ runs:
 
   steps:
     - name: Refresh vendor directory
+      shell: bash
       run: ${{ github.action_path }}/sync-go-vendor.sh 
