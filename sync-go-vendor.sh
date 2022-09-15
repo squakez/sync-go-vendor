@@ -16,4 +16,4 @@ echo "🔄 refreshing vendor directory"
 go mod vendor
 go generate -mod=vendor $1
 git add --all
-git commit -m "Vendor directory refresh"
+git diff-index --quiet HEAD || git commit -m "Vendor directory refresh"
